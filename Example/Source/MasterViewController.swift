@@ -71,6 +71,14 @@ class MasterViewController: UITableViewController {
                     let destination = DownloadRequest.suggestedDownloadDestination(for: .cachesDirectory,
                                                                                    in: .userDomainMask)
                     return AF.download("https://httpbin.org/stream/1", to: destination)
+                case "NTLM":
+                    detailViewController.segueIdentifier = "NTLM"
+                    var request = AF.request("http://tec-w-003989.labs.microstrategy.com:8080/Library/api/auth/login", method: .post)
+                    request.authenticate(username: "stest1", password: "stest1")
+                    
+                    return request
+                    
+                    
                 default:
                     return nil
                 }
